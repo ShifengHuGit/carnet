@@ -50,6 +50,7 @@ $ carnet status
   Range:    146 Km
 
   Location: (37.8197, -122.4786)
+            http://www.latlong.net/c/?lat=37.8197&long=-122.4786
 ```
 
 And how to use the API:
