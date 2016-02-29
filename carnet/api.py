@@ -11,7 +11,7 @@ from string import ascii_letters, digits
 
 
 def random_id():
-    alphabet = ascii_letters+digits
+    alphabet = ascii_letters + digits
     return ''.join(choice(alphabet) for i in range(24))
 
 

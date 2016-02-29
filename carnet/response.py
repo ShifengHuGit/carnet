@@ -6,13 +6,13 @@ def parse_tag(tag):
         # strip namespace
         ns_end = tag.index('}')
         ns = tag[1:ns_end]
-        tag = tag[ns_end+1:]
+        tag = tag[ns_end + 1:]
     else:
         ns = None
     return ns, tag
 
 
-def skip_to_children( tag):
+def skip_to_children(tag):
     return tag.endswith('List') or tag in (
         'VehicleDetailes',
     )

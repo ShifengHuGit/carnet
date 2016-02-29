@@ -5,6 +5,7 @@ import requests
 
 DEFAULT_URL = 'https://wsbvw.hughestelematics.com/HTIWebGateway/'
 
+
 class Endpoint(object):
     def __init__(self, transaction_id, url=None):
         self.url = url if url else DEFAULT_URL
