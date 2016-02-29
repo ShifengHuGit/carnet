@@ -18,6 +18,28 @@ def print_vehicle_info(info):
         "".format(**info))
 
 
+def print_battery_status(info):
+    plug_state = info.get('PlugConnectionState')
+    charging_state = info.get('BatteryChargeState')
+    remaining_charge_time = int(info.get('RemainingChargingTime'))
+    charge_pct = info.get('StateOfCharge')
+    battery_range = info.get('CruisingRange')
+
+    if plug_state == 'connected' and charging_state == 'charging':
+        charging_state = '{}, charging  ({}h {}m untill full)'.format(
+            plug_state, remaining_charge_time//60, remaining_charge_time%60
+        )
+    elif plug_state == 'disconnected':
+        charging_state = 'disconnected'
+    else:
+        charging_state = '{}, {}'.format(
+            plug_state, charging_state
+        )
+
+    return "  Battery:  {}%\n  Range:    {} Km\n  Charging: {}\n".format(
+        charge_pct, battery_range, charging_state)
+
+
 def print_status_info(status, details=False):
     click.echo("---- Main Status ---------------------------")
     service_data = status.get('ServiceData')
@@ -27,11 +49,7 @@ def print_status_info(status, details=False):
             "".format(**service_data))
     battery = status.get('ChargingData')
     if battery and battery.get('BatteryChargeState'):
-        click.echo(
-            "  Battery:  {StateOfCharge}%\n"
-            "  Charging: {BatteryChargeState}\n"
-            "  Range:    {CruisingRange} Km\n"
-            "".format(**battery))
+        click.echo(print_battery_status(battery))
     elif service_data:
         click.echo(
             "  Fuel:   {FuelLevel}/{FuelCapacity} L"

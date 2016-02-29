@@ -45,9 +45,9 @@ $ carnet status
 ---- Main Status ---------------------------
   Mileage: 265 Km
 
-  Battery:  82%
-  Charging: off
-  Range:    146 Km
+  Battery:  80%
+  Range:    144 Km
+  Charging: connected, charging  (1h 35m untill full)
 
   Location: (37.8197, -122.4786)
             http://www.latlong.net/c/?lat=37.8197&long=-122.4786

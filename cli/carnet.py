@@ -64,6 +64,16 @@ def setup(config, account_id, pin):
 
 @main.command()
 @pass_config
+@require_auth
+def info(config):
+    if config.json:
+        print(pretty_json(config.info))
+    else:
+        print_vehicle_info(config.info)
+
+
+@main.command()
+@pass_config
 @click.option('--details', is_flag=True,
               help="Print all details not just the summary")
 @require_auth
