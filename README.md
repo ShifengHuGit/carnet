@@ -15,53 +15,53 @@ how you use this library!
 
 See the cli in action:
 
-.. code-block:: bash
+```
+$ carnet setup
+Account ID: 11111111
+PIN: 1111
+Verifying credentials...
+Success!
+---- Vehicle information -------------------
+  Model: VW eGolf (2016)
+  Color: Pacific Blue Metallic
+  VIN:   XXXXXXXXXXX
+  TCUID: XXXXXXXXXXX
 
-    $ carnet setup
-    Account ID: 11111111
-    PIN: 1111
-    Verifying credentials...
-    Success!
-    ---- Vehicle information -------------------
-      Model: VW eGolf (2016)
-      Color: Pacific Blue Metallic
-      VIN:   XXXXXXXXXXX
-      TCUID: XXXXXXXXXXX
-    
-    ---- Owner information ---------------------
-      Phone: 5550000000
-      Email: foo@bar.com
-    
-    $ carnet status
-    ---- Vehicle information -------------------
-      Model: VW eGolf (2016)
-      Color: Pacific Blue Metallic
-      VIN:   XXXXXXXXXXX
-      TCUID: XXXXXXXXXXX
-    
-    ---- Owner information ---------------------
-      Phone: 5550000000
-      Email: foo@bar.com
-    
-    ---- Main Status ---------------------------
-      Mileage: 265 Km
-    
-      Battery:  82%
-      Charging: off
-      Range:    146 Km
-    
-      Location: (37.8197, -122.4786)
+---- Owner information ---------------------
+  Phone: 5550000000
+  Email: foo@bar.com
+
+$ carnet status
+---- Vehicle information -------------------
+  Model: VW eGolf (2016)
+  Color: Pacific Blue Metallic
+  VIN:   XXXXXXXXXXX
+  TCUID: XXXXXXXXXXX
+
+---- Owner information ---------------------
+  Phone: 5550000000
+  Email: foo@bar.com
+
+---- Main Status ---------------------------
+  Mileage: 265 Km
+
+  Battery:  82%
+  Charging: off
+  Range:    146 Km
+
+  Location: (37.8197, -122.4786)
+```
 
 And how to use the API:
 
-.. code-block:: python
+```python
+from carnet import Api
 
-    from carnet import Api
-    
-    api = Api(account_id, pin)
-    status = api.status()
-    lat = status['VehicleLocation']['Latitude']
-    long = status['VehicleLocation']['Longitude']
+api = Api(account_id, pin)
+status = api.status()
+lat = status['VehicleLocation']['Latitude']
+lon = status['VehicleLocation']['Longitude']
+```
 
 Feature Support
 ---------------
