@@ -78,8 +78,8 @@ appreciated.
 Security Considerations
 -----------------------
 
-A principal part of the motivation to implement
-this tool was to discover how secure is the api.
+This project started motivated by my curiosity
+about how secure secure was the api.
 
 I must confess that the findings are not very
 encouraging:
@@ -97,3 +97,7 @@ encouraging:
   email of the owner, location of the car and
   much more, which opens the door to social
   attacks.
+
+I have already contacted the company that runs
+this service and will let them know about my
+findings and suggestions.
