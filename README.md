@@ -102,3 +102,12 @@ encouraging:
 I have already contacted the company that runs
 this service and will let them know about my
 findings and suggestions.
+
+Install
+-------
+
+It requires python3. To install run:
+
+```
+</path/to/python3> setup.py install
+```
