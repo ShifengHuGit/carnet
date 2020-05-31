@@ -2,8 +2,9 @@ from .endpoint import Endpoint
 from .requests import (
     AuthRequest,
     StatusRequest,
+    GetAll,
     PairingRequest,
-    ConfirmPairingRequest,
+    ConfirmPairingRequest
 )
 
 from random import choice
@@ -37,14 +38,14 @@ class Api(object):
     @property
     def vin(self):
         try:
-            return self.account_info['Vehicle']['VIN']
+            return self.account_info['Account']['AccountInfo']['VIN']
         except Exception:
             return None
 
     @property
     def tcuid(self):
         try:
-            return self.account_info['Vehicle']['TCUID']
+            return self.account_info['Account']['AccountInfo']['TCUID']
         except Exception:
             return None
 
@@ -63,11 +64,15 @@ class Api(object):
         status, data = self.endpoint.send(request)
         if status != 'FAILURE':
             self.account_info = data
-            if not self.is_authenticated:
-                raise Exception(
-                    'Unable to find VIN and TCUID in '
-                    'response: {}'.format(data)
-                )
+            request = GetAll(self.account_id)
+            status, data = self.endpoint.send(request)
+            if status != 'FAILURE':
+                self.account_info = data
+                if not self.is_authenticated:
+                    raise Exception(
+                        'Unable to find VIN and TCUID in '
+                        'response: {}'.format(data)
+                    )
             return self.account_info
         else:
             self.account_info = None

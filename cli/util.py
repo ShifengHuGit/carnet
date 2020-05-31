@@ -3,19 +3,23 @@ import json
 
 
 def print_vehicle_info(info):
-    vehicle = info.get('Vehicle')
+    Account= info.get('Account').get('AccountInfo')
+    vehicle = info.get('Account').get('VehicleDetails')
+    Feature = info.get('Account').get('Feature')
     click.echo(
         "---- Vehicle information -------------------\n"
         "  Model: {Make} {Model} ({ModelYear})\n"
-        "  Color: {ExteriorColor}\n"
-        "  VIN:   {VIN}\n"
-        "  TCUID: {TCUID}\n"
+        "  Color: {Color}\n"
+	"  LicensePlate: {VehicleLicensePlate}\n"
+	"  Platform: {DeviceType}\n"
         "".format(**vehicle))
     click.echo(
-        "---- Owner information ---------------------\n"
-        "  Phone: {phone}\n"
-        "  Email: {email}\n"
-        "".format(**info))
+	"---- Account Information -------------------\n"
+	"AccountID: {AccountID}\n"
+   	"Subscription: {CreateTimestamp}\n"
+    	"VIN: {VIN}\n"
+    	"TCUID: {TCUID}\n"
+	"".format(**Account)) 
 
 
 def print_battery_status(info):

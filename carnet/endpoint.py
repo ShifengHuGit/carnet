@@ -3,7 +3,7 @@ from .response import parse_response
 import requests
 
 
-DEFAULT_URL = 'https://wsbvw.hughestelematics.com/HTIWebGateway/'
+DEFAULT_URL = 'https://wsbvw.htichina.com.cn/HTIWebGateway/'
 
 
 class Endpoint(object):
