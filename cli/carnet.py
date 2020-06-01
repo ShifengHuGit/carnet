@@ -55,7 +55,7 @@ def setup(config, account_id, pin):
     config.pin = pin
     config.info = info
     config.transaction_id = api.transaction_id
-    click.echo(click.style('Success!', fg='green'), file=sys.stderr)
+    click.echo(click.style('Success!', fg='red'), file=sys.stderr)
     if config.json:
         print(pretty_json(status))
     else:
@@ -95,9 +95,11 @@ def status(config, details):
     if config.json:
         print(pretty_json(info))
     else:
+        click.echo(click.style('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄',fg='yellow'))
         print_vehicle_info(config.info)
         #print(info)
         print_status_info(info, details)
+        click.echo(click.style('▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀',fg='yellow'))
 
 
 @main.command()

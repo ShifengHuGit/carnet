@@ -8,14 +8,14 @@ def print_vehicle_info(info):
     vehicle = info.get('Account').get('VehicleDetails')
     Feature = info.get('Account').get('Feature')
     click.echo(
-        "---- Vehicle information -------------------\n"
+        "------------ Vehicle information ------------\n"
         "  Model: {Make} {Model} ({ModelYear})\n"
         "  Color: {Color}\n"
 	"  LicensePlate: {VehicleLicensePlate}\n"
 	"  Platform: {DeviceType}\n"
         "".format(**vehicle))
     click.echo(
-	"---- Account Information -------------------\n"
+	"------------ Account Information-------------\n"
 	"AccountID: {AccountID}\n"
    	"Subscription: {CreateTimestamp}\n"
     	"VIN: {VIN}\n"
@@ -46,11 +46,11 @@ def print_battery_status(info):
 
 
 def print_status_info(status, details=False):
-    click.echo("---- Main Status ---------------------------")
+    click.echo(click.style('---------- Main Information -----------',fg='yellow'))
     service_data = status.get('ServiceData')
     if service_data:
         click.echo(
-            "  Mileage: {OverallMileage} Km\n"
+            "  Mileage/总里程: {OverallMileage} Km\n"
             "".format(**service_data))
     battery = status.get('ChargingData')
     if battery and battery.get('BatteryChargeState'):
@@ -77,26 +77,19 @@ def print_status_info(status, details=False):
             "".format(**location))
 
     if details:
-        click.echo("---- Detailed Status -----------------------")
+        click.echo(click.style('---------- Detailed Status -----------',fg='yellow'))
         #click.echo(pretty_json(status))
         print_vehicle_Detail(status)
 
 def print_vehicle_Detail(info):
     UpdateTime = info.get('UnifiedStatusTimestamp')
     click.echo('Last Updated: %s' %  UpdateTime)
-    click.echo('-----------Doors------------')
+    click.echo(click.style('-----------Doors------------',fg='blue'))
     for Door in info.get('DoorState'):
-        for Value in Door:
-            click.echo(
-                '%s : %s' % Value['DoorId'] % Value['DoorStatus']
-            )
-    click.echo('----------Windows-----------')
+        click.echo( "%s: \t\t%s" % (Door.get('DoorId'), Door.get('DoorStatus')))
+    click.echo(click.style('----------Windows-----------', fg='red'))
     for Window in info.get('WindowState'):
-        for Value in Window:
-            click.echo(
-                '%s : %s' % Value['WindowId'] % Value['WindowStatus']
-            )
-
+        click.echo( "%s: \t\t%s" % (Window.get('WindowId'), Window.get('WindowStatus')))
 
 def pretty_json(data):
     return json.dumps(data, sort_keys=True, indent=4)
