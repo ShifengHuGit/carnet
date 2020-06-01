@@ -22,9 +22,9 @@ class StatusRequest(BaseRequest):
                         <!--Optional:-->
                         <v11:Organization>VW</v11:Organization>
                         <!--Optional:-->
-                        <v11:Region>US</v11:Region>
+                        <v11:Region>China</v11:Region>
                         <!--Optional:-->
-                        <v11:ApplicationName>Android</v11:ApplicationName>
+                        <v11:ApplicationName>iPhone</v11:ApplicationName>
                     </v1:Header>
                     <v1:Data>
                         <v1:AccountId>?</v1:AccountId>

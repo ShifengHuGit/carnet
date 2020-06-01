@@ -51,7 +51,7 @@ def setup(config, account_id, pin):
     except Exception as e:
         raise click.ClickException(str(e))
 
-    config.account_id = account_id
+    config.account_id = info['Account']['AccountInfo']['AccountID']
     config.pin = pin
     config.info = info
     config.transaction_id = api.transaction_id
@@ -96,6 +96,7 @@ def status(config, details):
         print(pretty_json(info))
     else:
         print_vehicle_info(config.info)
+        #print(info)
         print_status_info(info, details)
 
 

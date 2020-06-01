@@ -1,6 +1,7 @@
 import click
 import json
-
+import time
+import datetime
 
 def print_vehicle_info(info):
     Account= info.get('Account').get('AccountInfo')
@@ -56,22 +57,45 @@ def print_status_info(status, details=False):
         click.echo(print_battery_status(battery))
     elif service_data:
         click.echo(
-            "  Fuel:   {FuelLevel}/{FuelCapacity} L"
+            "  Fuel/燃油:   {FuelLevel}/{FuelCapacity} L"
             "".format(**service_data))
         click.echo(
-            "  Range:    {CruisingRange} Km\n"
+            "  Range/续航:    {CruisingRange} Km\n"
             "".format(**battery))
+        Temp = float(status.get('ClimatisationData').get('OutTemp').get('measurementValue'))
+        Temp = Temp/10-273.15
+        click.echo(
+            "  Outside Temperature/车外温度: %.2f °C \n" % Temp )
 
     location = status.get('VehicleLocation')
     if location:
         click.echo(
-            "  Location: ({Latitude}, {Longitude})\n"
+            "  Location/坐标: ({Latitude}, {Longitude})\n"
+            "  Altitude/海拔: {Altitude}m  \n"
+            "  Course/航向：{Course} \n"
             "            http://www.latlong.net/c/?lat={Latitude}&long={Longitude}\n"
             "".format(**location))
 
     if details:
         click.echo("---- Detailed Status -----------------------")
-        click.echo(pretty_json(status))
+        #click.echo(pretty_json(status))
+        print_vehicle_Detail(status)
+
+def print_vehicle_Detail(info):
+    UpdateTime = info.get('UnifiedStatusTimestamp')
+    click.echo('Last Updated: %s' %  UpdateTime)
+    click.echo('-----------Doors------------')
+    for Door in info.get('DoorState'):
+        for Value in Door:
+            click.echo(
+                '%s : %s' % Value['DoorId'] % Value['DoorStatus']
+            )
+    click.echo('----------Windows-----------')
+    for Window in info.get('WindowState'):
+        for Value in Window:
+            click.echo(
+                '%s : %s' % Value['WindowId'] % Value['WindowStatus']
+            )
 
 
 def pretty_json(data):
